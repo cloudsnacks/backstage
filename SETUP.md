@@ -28,9 +28,9 @@ npx @backstage/create-app@latest
 
 inputs:
 
-app_name: cloudsnacks
+app_name: backstage
 
-cd cloudsnacks && yarn dev
+cd backstage && yarn dev
 
 open http://localhost:3000
 
@@ -60,7 +60,7 @@ cb10f0a526d613557aef260ef5055d18f518cc2f
 
 create app
 
-yarn backstage-cli create-github-app cloudsnacks
+yarn backstage-cli create-github-app backstage
 
 add github integration
 
@@ -69,7 +69,7 @@ integrations:
   github:
     - host: github.com
       apps:
-        - $include: github-app-backstage-cloudsnacks-credentials.yaml```
+        - $include: github-app-backstage-credentials.yaml```
 ```
 
 **allow read and write**

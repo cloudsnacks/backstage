@@ -45,4 +45,7 @@ backend.add(import('@backstage/plugin-kubernetes-backend/alpha'));
 // github plugins
 backend.add(import('@backstage/plugin-scaffolder-backend-module-github'));
 
+// readme plugin
+backend.add(import('@axis-backstage/plugin-readme-backend'));
+
 backend.start();

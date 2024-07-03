@@ -27,9 +27,6 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-        with:
-          sparse-checkout: |
-            backstage
 
       - name: use node.js ${{ matrix.node-version }}
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
@@ -47,7 +44,6 @@ jobs:
           yarn install --frozen-lockfile
           yarn tsc
           yarn build:backend --config ../../app-config.yaml --config ../../app-config.production.yaml
-        working-directory: ./backstage
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446 # v3.2.0
@@ -62,8 +58,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25 # v5.4.0
         with:
-          context: ./backstage
-          file: ./backstage/packages/backend/Dockerfile
+          context: '.'
+          file: ./packages/backend/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |

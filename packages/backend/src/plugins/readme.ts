@@ -13,15 +13,3 @@
 //     tokenManager: env.tokenManager,
 //   });
 // }
-
-
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Secret
-metadata:
-  name: kubenretes-service-account-token
-  namespace: <NAMESPACE>
-  annotations:
-    kubernetes.io/service-account.name: <SERVICE_ACCOUNT_NAME>
-type: kubernetes.io/service-account-token
-EOF

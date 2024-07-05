@@ -44,7 +44,7 @@ import { UnifiedThemeProvider, themes } from '@backstage/theme';
 import { CssBaseline } from '@material-ui/core';
 import { apertureTheme } from './theme/apertureTheme';
 import { myTheme } from './theme/myTheme';
-import LightIcon from '@material-ui/icons/WbSunny';
+// import LightIcon from '@material-ui/icons/WbSunny';
 
 import { HomepageCompositionRoot } from '@backstage/plugin-home';
 import { HomePage } from './components/home/HomePage';

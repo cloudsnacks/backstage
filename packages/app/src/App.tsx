@@ -40,11 +40,58 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { AutoLogout } from '@backstage/core-components';
 
+import { UnifiedThemeProvider, themes } from '@backstage/theme';
+import { CssBaseline } from '@material-ui/core';
+import { apertureTheme } from './theme/apertureTheme';
+import { myTheme } from './theme/myTheme';
+// import LightIcon from '@material-ui/icons/WbSunny';
+
 import { HomepageCompositionRoot } from '@backstage/plugin-home';
 import { HomePage } from './components/home/HomePage';
 
+
 const app = createApp({
   apis,
+  themes: [
+    {
+      id: 'light',
+      title: 'Light',
+      variant: 'light',
+      Provider: ({ children }) => (
+        <UnifiedThemeProvider theme={themes.light} children={children} />
+      ),
+    },
+    {
+      id: 'dark',
+      title: 'Dark',
+      variant: 'dark',
+      Provider: ({ children }) => (
+        <UnifiedThemeProvider theme={themes.dark} children={children} />
+      ),
+    },
+    {
+      id: 'aperture',
+      title: 'Aperture',
+      variant: 'light',
+      Provider: ({ children }) => (
+        <UnifiedThemeProvider theme={apertureTheme} noCssBaseline>
+          <CssBaseline />
+          {children}
+        </UnifiedThemeProvider>
+      ),
+    },
+    {
+      id: 'myTheme',
+      title: 'My Theme',
+      variant: 'dark',
+      Provider: ({ children }) => (
+        <UnifiedThemeProvider theme={myTheme} noCssBaseline>
+          <CssBaseline />
+          {children}
+        </UnifiedThemeProvider>
+      ),
+    },
+  ],
   components: {
     SignInPage: props => (
       <SignInPage

@@ -41,22 +41,39 @@ yarn --cwd packages/backend add pg
 
 ### Auth
 
-#### Github
+#### Github OAuth
 https://backstage.io/docs/getting-started/config/authentication
 
 I'll use Github for auth, I'd normally use Authelia, but I'm trying to keep this simple.
 
-Since terraform doesnt support creating github apps, we'll head over to the UI.
+Since terraform doesn't support creating github apps, we'll head over to the UI.
+https://github.com/settings/applications/new
 
-http://localhost:3000
+App name: backstage dev
 
-update to `https://backstage.cloudsnacks.dev`
+Homepage URL: http://localhost:3000
+Authorization callback URL: http://localhost:7007/api/auth/github/handler/frame
 
-Ov23lie3kUTskm7X4j8g
-cb10f0a526d613557aef260ef5055d18f518cc2f
+Click generate secret
 
+Save the client id and secret into the app-config.local.yaml
 
-#### Github integration
+```app-config.local.yaml
+auth:
+  environment: development
+  providers:
+    github:
+      development:
+        clientId: xxxxxxxxx
+        clientSecret: zzzzzzzzzzzzzzzzzzzzzzzzzzzz
+        signIn:
+          resolvers:
+            - resolver: usernameMatchingUserEntityName
+            - resolver: emailMatchingUserEntityProfileEmail
+            - resolver: emailLocalPartMatchingUserEntityName
+```
+
+#### Github App Integration
 
 create app
 

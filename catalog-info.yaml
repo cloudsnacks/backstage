@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: backstage
+  description: An example of a Backstage application.
+  # Example for optional annotations
+  annotations:
+    github.com/project-slug: cloudsnacks/backstage
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/kubernetes-id: pitower
+    backstage.io/kubernetes-label-selector: app.kubernetes.io/name=backstage
+    backstage.io/kubernetes-namespace: backstage
+    backstage.io/kubernetes-service-name: backstage
+  links:
+    - url: https://backstage.pitower.link
+      title: Cloud Snacks Backstage
+spec:
+  type: website
+  owner: john@example.com
+  lifecycle: experimental

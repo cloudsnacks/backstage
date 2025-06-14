@@ -1,0 +1,61 @@
+# Propagittor Configuration
+# This file defines environments, rollout strategies, and GitOps workflows
+# Generated: 2025-06-14 10:32:35 UTC
+# Edit this file to customize your deployment pipeline
+version: '1.0'
+repository:
+  default_branch: main
+  protected_branches:
+    - main
+  auto_merge:
+    enabled: true
+    require_reviews: true
+    delete_branch_after_merge: true
+environments:
+  - name: test2
+    type: development
+    description: Test2 environment
+    branch: main
+    deployment:
+      auto_deploy: false
+      strategy: blue_green
+      timeout: 10m
+    config:
+      database_size: small
+      replicas: 1
+      monitoring: basic
+    health_checks:
+      enabled: true
+      endpoint: /health
+      timeout: 30s
+      retries: 3
+    notifications:
+      slack:
+        channel: '#test2-deployments'
+        on_success: false
+        on_failure: true
+rollout_strategies:
+  direct:
+    description: Immediate deployment with no gradual rollout
+    steps:
+      - name: deploy
+        percentage: 100
+  blue_green:
+    description: Deploy to parallel environment then switch traffic
+    steps:
+      - name: deploy_green
+        percentage: 0
+        health_check_required: true
+      - name: switch_traffic
+        percentage: 100
+        manual_approval: true
+      - name: cleanup_blue
+        percentage: 100
+        delay: 10m
+integrations:
+  github:
+    auto_create_tracking_issues: true
+    labels:
+      environment_prefix: 'env:'
+      promotion_label: promotion
+      auto_merge_label: auto-merge
